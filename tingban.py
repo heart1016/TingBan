@@ -1,6 +1,7 @@
 import requests
 import json
 import os
+import sys
 
 global url
 url = 'http://www.tingban.cn/webapi/audios/list?id=1100000000316&pagesize=1&pagenum=1&sorttype=-1&_=1556425026680'
@@ -31,7 +32,8 @@ class ProgressBar(object):
             print(self.__get_info(), end=self.end_str)
 
 def TingBan():
-    global url
+    #global url
+    '''
     response = requests.get(url=url, stream=True).text
     response = json.loads(response)
     count = response['result']['count']
@@ -43,7 +45,8 @@ def TingBan():
     r = download_file(file_url, file_name)
     if r:
         print('Mp3 file already download:', file_name)
-    for i in range(2, count+1):
+    '''
+    for i in range(int(sys.argv[1]), int(sys.argv[1])+1):
         url = 'http://www.tingban.cn/webapi/audios/list?id=1100000000316&pagesize=1&pagenum={}&sorttype=-1&_=1556425026680'.format(i)
         response = requests.get(url=url, stream=True).text
         response = json.loads(response)
